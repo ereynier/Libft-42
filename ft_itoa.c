@@ -47,7 +47,7 @@ char	*ft_itoa(int n)
 	if (n < 0)
 		i++;
 	if (!(out = (char*)malloc(i * sizeof(char) + 1)))
-		return (0);
+		return (NULL);
 	i = 0;
 	if (n < 0)
 	{

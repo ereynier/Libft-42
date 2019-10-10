@@ -18,17 +18,19 @@ void	*ft_memccpy(void *restrict dst, const void *restrict src,
 {
 	size_t i;
 
+	if (dst == NULL && src == NULL)
+		return (NULL);
 	i = 0;
 	while (i < n)
 	{
-		if (*(((char*)src) + i) == (unsigned char)(c))
+		if (((char*)src)[i] == (unsigned char)(c))
 		{
-			*(((char*)dst) + i) = *(((char*)src) + i);
+			((char*)dst)[i] = ((char*)src)[i];
 			i++;
 			return (dst + i);
 		}
-		*(((char*)dst) + i) = *(((char*)src) + i);
+		((char*)dst)[i] = ((char*)src)[i];
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
