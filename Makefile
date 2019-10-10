@@ -6,7 +6,7 @@
 #    By: ereynier <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/10/08 18:19:15 by ereynier     #+#   ##    ##    #+#        #
-#    Updated: 2019/10/09 17:08:58 by ereynier    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/10/10 20:24:40 by ereynier    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -27,10 +27,10 @@ NAME	= libft.a
 
 CFLAGS	= -Wall -Werror -Wextra
 
-%.o: %.c
+%.o: %.c	$(INCS)
 		gcc $(CFLAGS) -I $(INCS) -o $@ -c $<
 
-$(NAME):	${OBJS} $(INCS)
+$(NAME):	${OBJS}
 			ar rc ${NAME} ${OBJS}
 			ranlib ${NAME}
 

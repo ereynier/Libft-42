@@ -13,13 +13,24 @@
 
 #include "libft.h"
 
-int		ft_conv(long int n, char *out, int i)
+static int	ft_count(int i, int j)
+{
+	while (j)
+	{
+		j = j / 10;
+		i++;
+	}
+	return (i);
+}
+
+static int	ft_conv(long int n, char *out, int i)
 {
 	long int j;
 
+	j = 0;
 	if (n < 0)
 		j = -n;
-	else
+	else if (n > 0)
 		j = n;
 	if (j / 10 > 0)
 	{
@@ -31,7 +42,7 @@ int		ft_conv(long int n, char *out, int i)
 	return (i);
 }
 
-char	*ft_itoa(int n)
+char		*ft_itoa(int n)
 {
 	int		i;
 	int		j;
@@ -39,11 +50,9 @@ char	*ft_itoa(int n)
 
 	j = n;
 	i = 0;
-	while (j)
-	{
-		j = j / 10;
+	if (j == 0)
 		i++;
-	}
+	i = ft_count(i, j);
 	if (n < 0)
 		i++;
 	if (!(out = (char*)malloc(i * sizeof(char) + 1)))

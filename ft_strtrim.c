@@ -13,7 +13,7 @@
 
 #include "libft.h"
 
-int		ft_charcomp(char const c, char const *set)
+static int	ft_charcomp(char const c, char const *set)
 {
 	int i;
 
@@ -27,7 +27,7 @@ int		ft_charcomp(char const c, char const *set)
 	return (0);
 }
 
-void	ft_dup(const char *s1, char *out, int start, int finish)
+static void	ft_dup(const char *s1, char *out, int start, int finish)
 {
 	int i;
 
@@ -41,7 +41,7 @@ void	ft_dup(const char *s1, char *out, int start, int finish)
 	out[i] = 0;
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char		*ft_strtrim(char const *s1, char const *set)
 {
 	int		start;
 	int		finish;
@@ -51,6 +51,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	start = 0;
 	finish = 0;
 	i = 0;
+	if (!(s1) || !(set))
+		return (NULL);
 	while (ft_charcomp(s1[i], set) && s1[i])
 		i++;
 	start = i;
@@ -59,7 +61,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (ft_charcomp(s1[i], set) && i > 0)
 		i--;
 	finish = i;
-	if ((finish - start) < 0 || !(out = (char*)malloc(finish - start)))
+	if ((finish - start) < 0 || !(out = (char*)malloc(finish - start + 1)))
 		return (NULL);
 	else
 		ft_dup(s1, out, start, finish);

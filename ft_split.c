@@ -13,7 +13,7 @@
 
 #include "libft.h"
 
-int		ft_countsep(char const *s, char c)
+static int	ft_countsep(char const *s, char c)
 {
 	int i;
 
@@ -27,7 +27,7 @@ int		ft_countsep(char const *s, char c)
 	return (i);
 }
 
-int		ft_dup(char const *s, char *dst, int start, char sep)
+static int	ft_dup(char const *s, char *dst, int start, char sep)
 {
 	int i;
 
@@ -41,7 +41,7 @@ int		ft_dup(char const *s, char *dst, int start, char sep)
 	return (i);
 }
 
-char	**ft_split(char const *s, char c)
+char		**ft_split(char const *s, char c)
 {
 	int		nbsep;
 	char	**out;
