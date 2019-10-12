@@ -6,7 +6,7 @@
 #    By: ereynier <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/10/08 18:19:15 by ereynier     #+#   ##    ##    #+#        #
-#    Updated: 2019/10/10 20:24:40 by ereynier    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/10/12 08:56:48 by ereynier    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -18,6 +18,10 @@ SRCS	= ft_atoi.c	ft_isalpha.c ft_itoa.c ft_memcpy.c ft_putendl_fd.c \
 		  ft_memchr.c ft_memset.c ft_putstr_fd.c ft_strjoin.c ft_strmapi.c \
 		  ft_strtrim.c ft_isalnum.c ft_isprint.c ft_memcmp.c ft_putchar_fd.c \
 		  ft_split.c ft_strlcat.c ft_strncmp.c ft_substr.c ft_iswspace.c
+
+SRCB	= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstmap.c ft_lstiter.c ft_lstadd_back.c
+
+OBJB	= ${SRCB:.c=.o}
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -31,13 +35,15 @@ CFLAGS	= -Wall -Werror -Wextra
 		gcc $(CFLAGS) -I $(INCS) -o $@ -c $<
 
 $(NAME):	${OBJS}
-			ar rc ${NAME} ${OBJS}
-			ranlib ${NAME}
+			ar rcs ${NAME} ${OBJS}
+
+bonus:		$(OBJB) ${OBJS}
+			ar rcs ${NAME} ${OBJB} ${OBJS}
 
 all:		${NAME}
 
 clean:		
-			rm -f ${OBJS}
+			rm -f ${OBJS} ${OBJB}
 
 fclean:		clean
 			rm -f ${NAME}

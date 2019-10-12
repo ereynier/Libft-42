@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_calloc.c                                      .::    .:/ .      .::   */
+/*   ft_lstlast_bonus.c                               .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ereynier <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/08 09:47:11 by ereynier     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/10 20:40:42 by ereynier    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/11 12:29:05 by ereynier     #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/11 12:59:28 by ereynier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+t_list	*ft_lstlast(t_list *lst)
 {
-	void *ptr;
+	t_list	*last;
 
-	if (!(ptr = malloc(count * size)))
+	last = lst;
+	if (last == NULL)
 		return (NULL);
-	ft_bzero(ptr, (count * size));
-	return (ptr);
+	while (last->next)
+		last = last->next;
+	return (last);
 }

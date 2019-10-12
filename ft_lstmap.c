@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_calloc.c                                      .::    .:/ .      .::   */
+/*   ft_lstmap_bonus.c                                .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ereynier <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/08 09:47:11 by ereynier     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/10 20:40:42 by ereynier    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/11 13:50:22 by ereynier     #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/11 14:10:28 by ereynier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(void*))
 {
-	void *ptr;
+	t_list	*out;
 
-	if (!(ptr = malloc(count * size)))
+	if (!(out = malloc(sizeof(t_list))))
 		return (NULL);
-	ft_bzero(ptr, (count * size));
-	return (ptr);
+	if (lst == NULL || f == NULL)
+		return (NULL);
+	out->content = (*f)(lst->content);
+	lst = lst->next;
+	while (lst->next)
+	{
+		ft_lstadd_back(&out, (*f)(lst->content));
+		lst = lst->next;
+	}
+	return (out);
 }

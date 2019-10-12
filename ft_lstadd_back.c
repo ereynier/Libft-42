@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_calloc.c                                      .::    .:/ .      .::   */
+/*   ft_lstadd_back_bonus.c                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ereynier <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/08 09:47:11 by ereynier     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/10 20:40:42 by ereynier    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/11 13:01:31 by ereynier     #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/11 13:19:23 by ereynier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	void *ptr;
+	t_list *ptr;
 
-	if (!(ptr = malloc(count * size)))
-		return (NULL);
-	ft_bzero(ptr, (count * size));
-	return (ptr);
+	if (alst == NULL || new == NULL)
+		return ;
+	ptr = *alst;
+	while (ptr->next)
+		ptr = ptr->next;
+	ptr->next = new;
 }

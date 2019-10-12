@@ -22,10 +22,17 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = start;
 	if ((int)(len) < (int)ft_strlen((char*)(&s[start])))
 		size = len;
-	else
+	else if (start < ft_strlen(s))
 		size = (int)ft_strlen((char*)(&s[start]));
-	if (!(out = malloc(size * sizeof(char) + 1)))
+	else
+		size = 0;
+	if (!(out = malloc(size + 1)))
 		return (0);
+	if (size == 0)
+	{
+		out[0] = '\0';
+		return (out);
+	}
 	while (s[i] != 0 && (i - start) < len)
 	{
 		out[i - start] = s[i];

@@ -43,17 +43,16 @@ static int	ft_dup(char const *s, char *dst, int start, char sep)
 
 char		**ft_split(char const *s, char c)
 {
-	int		nbsep;
 	char	**out;
 	int		i;
 	int		k;
 	int		j;
 
-	i = 0;
 	k = 0;
-	nbsep = ft_countsep(s, c);
-	if (!(out = (char**)malloc((nbsep + 2) * sizeof(char*))))
+	i = ft_countsep(s, c);
+	if (!(out = (char**)malloc((i + 2) * sizeof(char*))))
 		return (0);
+	i = 0;
 	while (i < (int)ft_strlen((char*)s))
 	{
 		j = 0;
@@ -64,6 +63,8 @@ char		**ft_split(char const *s, char c)
 		i = i + ft_dup(s, out[k], i, c) + 1;
 		if (out[k][0] != 0)
 			k++;
+		else
+			free(out[k]);
 	}
 	out[k] = 0;
 	return (out);
