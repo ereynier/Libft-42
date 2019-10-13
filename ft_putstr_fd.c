@@ -6,7 +6,7 @@
 /*   By: ereynier <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 14:40:37 by ereynier     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 14:45:19 by ereynier    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/13 12:45:50 by ereynier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,5 +15,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
+	if (!s)
+		return ;
 	write(fd, s, ft_strlen(s));
 }
