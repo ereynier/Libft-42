@@ -20,12 +20,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	int		size;
 
 	i = start;
-	if ((int)(len) < (int)ft_strlen((char*)(&s[start])))
-		size = len;
-	else if (start < ft_strlen(s))
-		size = (int)ft_strlen((char*)(&s[start]));
-	else
+	if (start > ft_strlen(s))
 		size = 0;
+	else if ((int)(len) < (int)ft_strlen((char*)(&s[start])))
+		size = len;
+	else
+		size = (int)ft_strlen((char*)(&s[start]));
 	if (!(out = malloc(size + 1)))
 		return (0);
 	if (size == 0)
