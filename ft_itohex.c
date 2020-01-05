@@ -1,54 +1,57 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strtrim.c                                     .::    .:/ .      .::   */
+/*   ft_itohex.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ereynier <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/08 10:56:40 by ereynier     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/17 19:21:17 by ereynier    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/11/01 11:34:46 by ereynier     #+#   ##    ##    #+#       */
+/*   Updated: 2019/11/01 11:34:47 by ereynier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_charcomp(char const c, char const *set)
+static int	ft_count(int i, long unsigned int j)
 {
-	int i;
-
-	i = 0;
-	while (set[i])
+	while (j)
 	{
-		if (set[i] == c)
-			return (1);
+		j = j / 16;
 		i++;
 	}
-	return (0);
+	return (i);
 }
 
-char		*ft_strtrim(char const *s1, char const *set)
+static int	ft_conv(long unsigned int n, char *out, int i)
 {
-	int		start;
-	int		finish;
+	if (n / 16 > 0)
+	{
+		i = ft_conv(n / 16, out, i) + 1;
+		out[i] = (n % 16) + '0';
+		if (out[i] > '9')
+			out[i] += 39;
+		return (i);
+	}
+	out[i] = (n % 16) + '0';
+	if (out[i] > '9')
+		out[i] += 39;
+	return (i);
+}
+
+char		*ft_itohex(long unsigned int n)
+{
 	int		i;
 	char	*out;
 
-	start = 0;
-	finish = 0;
 	i = 0;
-	if (!(s1) || !(set))
-		return (NULL);
-	while (s1[i] && ft_charcomp(s1[i], set))
+	if (n == 0)
 		i++;
-	start = i;
-	while (s1[i])
-		i++;
-	i--;
-	while (i > 0 && ft_charcomp(s1[i], set))
-		i--;
-	finish = i;
-	if (!(out = ft_substr(s1, start, finish - start + 1)))
+	i = ft_count(i, n);
+	if (!(out = (char*)malloc(i * sizeof(char) + 1)))
 		return (NULL);
+	i = 0;
+	i = ft_conv(n, out, i);
+	out[i + 1] = 0;
 	return (out);
 }

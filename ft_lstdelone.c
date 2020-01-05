@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strdup.c                                      .::    .:/ .      .::   */
+/*   ft_lstdelone.c                                   .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ereynier <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/07 20:35:22 by ereynier     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/07 20:53:25 by ereynier    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/17 17:43:00 by ereynier     #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/17 20:28:55 by ereynier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-	char	*dup;
-	int		i;
-
-	if (s1 == NULL)
-		return (NULL);
-	i = 0;
-	while (s1[i])
-		i++;
-	if ((dup = (char*)malloc(i * sizeof(char) + 1)) == 0)
-		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		dup[i] = s1[i];
-		i++;
-	}
-	dup[i] = 0;
-	return (dup);
+	if (!lst || !del)
+		return ;
+	(*del)(lst->content);
+	free(lst->next);
+	free(lst);
 }

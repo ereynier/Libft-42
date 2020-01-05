@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strdup.c                                      .::    .:/ .      .::   */
+/*   ft_lst_clear.c                                   .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ereynier <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/07 20:35:22 by ereynier     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/07 20:53:25 by ereynier    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/17 17:41:58 by ereynier     #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/17 20:45:16 by ereynier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	char	*dup;
-	int		i;
+	t_list *ptr;
 
-	if (s1 == NULL)
-		return (NULL);
-	i = 0;
-	while (s1[i])
-		i++;
-	if ((dup = (char*)malloc(i * sizeof(char) + 1)) == 0)
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	ptr = *lst;
+	if (!lst || !del)
+		return ;
+	while (ptr)
 	{
-		dup[i] = s1[i];
-		i++;
+		(*del)(ptr);
+		*lst = ptr->next;
+		free(ptr->next);
+		free(ptr);
+		ptr = *lst;
 	}
-	dup[i] = 0;
-	return (dup);
 }

@@ -6,7 +6,7 @@
 /*   By: ereynier <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 11:21:51 by ereynier     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 12:33:54 by ereynier    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/17 16:51:26 by ereynier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,6 +41,20 @@ static int	ft_dup(char const *s, char *dst, int start, char sep)
 	return (i);
 }
 
+char		**ft_clear(char **out, int k)
+{
+	if (!k)
+		return (NULL);
+	k--;
+	while (k)
+	{
+		free(out[k]);
+		k--;
+	}
+	free(out);
+	return (NULL);
+}
+
 char		**ft_split(char const *s, char c)
 {
 	char	**out;
@@ -59,7 +73,7 @@ char		**ft_split(char const *s, char c)
 		while (s[i + j] != c && s[i + j] != 0)
 			j++;
 		if (!(out[k] = (char*)malloc(j * sizeof(char) + 1)))
-			return (0);
+			return (ft_clear(out, k));
 		i = i + ft_dup(s, out[k], i, c) + 1;
 		if (out[k][0] != 0)
 			k++;

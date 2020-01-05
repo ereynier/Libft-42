@@ -1,36 +1,58 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strdup.c                                      .::    .:/ .      .::   */
+/*   ft_itoa.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ereynier <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/07 20:35:22 by ereynier     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/07 20:53:25 by ereynier    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/08 12:38:39 by ereynier     #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/08 14:18:40 by ereynier    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+static int			ft_count(int i, int j)
 {
-	char	*dup;
-	int		i;
-
-	if (s1 == NULL)
-		return (NULL);
-	i = 0;
-	while (s1[i])
-		i++;
-	if ((dup = (char*)malloc(i * sizeof(char) + 1)) == 0)
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	while (j)
 	{
-		dup[i] = s1[i];
+		j = j / 10;
 		i++;
 	}
-	dup[i] = 0;
-	return (dup);
+	return (i);
+}
+
+static unsigned int	ft_conv(unsigned int n, char *out, int i)
+{
+	unsigned int j;
+
+	j = n;
+	if (j / 10 > 0)
+	{
+		i = ft_conv(j / 10, out, i) + 1;
+		out[i] = (j % 10) + '0';
+		return (i);
+	}
+	out[i] = (j % 10) + '0';
+	return (i);
+}
+
+char				*ft_uitoa(unsigned int n)
+{
+	int		i;
+	int		j;
+	char	*out;
+
+	j = n;
+	i = 0;
+	if (j == 0)
+		i++;
+	i = ft_count(i, j);
+	if (!(out = (char*)malloc(i * sizeof(char) + 1)))
+		return (NULL);
+	i = 0;
+	i = ft_conv(n, out, i);
+	out[i + 1] = 0;
+	return (out);
 }
